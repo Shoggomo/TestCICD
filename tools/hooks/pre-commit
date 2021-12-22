@@ -1,4 +1,3 @@
 #!/bin/sh
 echo "Checking code style..."
 gradlew checkstyle
-exit 0
