@@ -74,15 +74,6 @@ jobs:
         with:
           name: apk
 
-      - name: Create Release
-        id: create_release
-        uses: actions/create-release@v1
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }} 
-        with:
-          tag_name: ${{ github.ref }}
-          release_name: Release ${{ github.ref }}
-
       - name: Get Repo Name
         run: echo "REPOSITORY_NAME=$(echo '${{ github.repository }}' | awk -F '/' '{print $2}')" >> $GITHUB_ENV; echo $REPOSITORY_NAME
         shell: bash
@@ -90,6 +81,15 @@ jobs:
       - name: Get Version From Tag
         run: echo "VERSION=$(echo '${{ github.ref }}' | awk -F 'refs.tags.v' '{print $2}')" >> $GITHUB_ENV; echo $VERSION
         shell: bash
+
+      - name: Create Release
+        id: create_release
+        uses: actions/create-release@v1
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }} 
+        with:
+          tag_name: ${{ github.ref }}
+          release_name: Release ${{ env.VERSION }}
 
       - name: Upload Release APK
         id: upload_release_asset
