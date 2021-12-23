@@ -1,4 +1,4 @@
-name: Minimal Android CI Workflow
+name: Lint, Test, Push, Release
 
 on:
   push:
