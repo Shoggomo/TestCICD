@@ -37,7 +37,9 @@ jobs:
 
   apk:
     name: Generate APK
-    needs: test
+    needs:
+      - test
+      - lint
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
